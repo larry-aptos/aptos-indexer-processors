@@ -19,10 +19,13 @@ jobs:
           git config --global credential.helper store
           echo "https://larry-aptos:${{ secrets.CI_TOKEN}}@github.com" > ~/.git-credentials
           
+          # SDK commit hash
           toml set Cargo.toml workspace.dependencies.aptos-indexer-processor-sdk.rev ${{ github.event.client_payload.commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
           toml set Cargo.toml workspace.dependencies.aptos-indexer-processor-sdk-server-framework.rev ${{ github.event.client_payload.commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
-          toml set Cargo.toml workspace.dependencies.aptos-indexer-testing-framework.rev ${{ github.event.client_payload.commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
-            
+          toml set Cargo.toml workspace.dependencies.aptos-indexer-testing-framework.rev ${{ github.event.client_payload.aptos_protos_commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
+          # Protos commit hash
+          toml set Cargo.toml workspace.dependencies.aptos-protos.rev ${{ github.event.client_payload.aptos_protos_commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml 
+          toml set Cargo.toml workspace.dependencies.aptos-indexer-test-transactions.rev ${{ github.event.client_payload.aptos_protos_commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
         working-directory: rust/
       - name: Configure Git
         run: |
