@@ -23,7 +23,7 @@ jobs:
           toml set Cargo.toml workspace.aptos-indexer-processor-sdk-server-framework.rev ${{ github.event.client_payload.commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
           toml set Cargo.toml workspace.dependencies.aptos-indexer-testing-framework.rev ${{ github.event.client_payload.commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
             
-          working-directory: rust/
+        working-directory: rust/
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
@@ -39,7 +39,7 @@ jobs:
            git push origin "$branch_name" --force
         env:
           GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
-        working-directory: aptos-indexer-processors-sdk/
+        working-directory: rust/
       - name: Create Pull Request
         run: |
           branch_name="${{ github.event.client_payload.branch_name }}-update-sdk"
