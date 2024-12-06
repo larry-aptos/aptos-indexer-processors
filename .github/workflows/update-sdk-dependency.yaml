@@ -20,7 +20,7 @@ jobs:
           echo "https://larry-aptos:${{ secrets.CI_TOKEN}}@github.com" > ~/.git-credentials
           
           toml set Cargo.toml workspace.dependencies.aptos-indexer-processor-sdk.rev ${{ github.event.client_payload.commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
-          toml set Cargo.toml workspace.aptos-indexer-processor-sdk-server-framework.rev ${{ github.event.client_payload.commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
+          toml set Cargo.toml workspace.dependencies.aptos-indexer-processor-sdk-server-framework.rev ${{ github.event.client_payload.commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
           toml set Cargo.toml workspace.dependencies.aptos-indexer-testing-framework.rev ${{ github.event.client_payload.commit_hash }} > Cargo.tmp && mv Cargo.tmp Cargo.toml
             
         working-directory: rust/
